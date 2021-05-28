@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    [SerializeField] private float spawnTimeMin = 0.5f;
+    [SerializeField] private float spawnTimeMin = 0.25f;
     [SerializeField] private float spawnTimeMax = 3f;
-    [SerializeField] private float spawnRadius = 1f;
 
     [SerializeField] private Asteroid asteroidPrefab;
+    [SerializeField] private BoxCollider2D myBox;
+    [SerializeField] private float x1;
+    [SerializeField] private float y1;
 
-    [SerializeField] private int simulatedAsteroids = 100;
-    [ExecuteInEditMode]
     // Start is called before the first frame update
     void Start()
     {
+        myBox = myBox.gameObject.GetComponent<BoxCollider2D>();
         this.StartCoroutine(SpawnCoroutine());
     }
 
@@ -36,36 +37,13 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void SpawnAsteroid()
     {
-        Debug.Log("Spawning asteroid");
+        x1 = Random.Range(myBox.bounds.min.x, myBox.bounds.max.x);
+        y1 = myBox.bounds.min.y;
 
-        Vector3 startPosition = GetRandomPointArundCircle(spawnRadius);
-        Vector3 endPosition = GetRandomPointArundCircle(spawnRadius);
+        Asteroid asteroid = Instantiate(asteroidPrefab, new Vector3(x1, y1, 0), Quaternion.identity);
 
-        Asteroid asteroid = Instantiate(asteroidPrefab, startPosition, Quaternion.identity);
-        asteroid.transform.LookAt(endPosition);
-    }
-
-    private Vector3 GetRandomPointArundCircle(float radius)
-    {
-        Vector2 point2D = Random.insideUnitCircle * radius;
-        Vector3 point3D = new Vector3(point2D.x, 0f, point2D.y);
-
-        return point3D;
-    }
-
-    private void OnDrawGizmos()
-    {
-
-        Color gizmoColor = Color.red;
-        for (int i = 0; i <= simulatedAsteroids; i++)
-        {
-            Gizmos.color = gizmoColor;
-            gizmoColor.g += 1f / simulatedAsteroids;
-            Vector3 startPosition = GetRandomPointArundCircle(spawnRadius);
-            Vector3 endPosition = GetRandomPointArundCircle(spawnRadius);
-            Gizmos.DrawLine(startPosition, endPosition);
-            Debug.Log("here");
-           // Gizmos.DrawSphere(transform.position, 1);
-        }
+        //I want to destroy the asteroids even if  they weren't hit by a bullet
+        //it's not working
+        Destroy(asteroid, 5);
     }
 }
