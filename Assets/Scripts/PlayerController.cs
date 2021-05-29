@@ -7,16 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float cooldown = 0.1f;
     public GameObject bullets;
     float m_fSpeed = 5.0f;
+    [SerializeField] GameManager gameManager;
 
     private float shootTime = 0.0f;
-
-
-    void Start()
-    {
-
-    }
-
-
 
     void FixedUpdate()
     {
@@ -42,5 +35,14 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bullets, transform.position, transform.rotation);
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.gameObject.tag == "Asteroid")
+        {
+            gameManager.gameOver = true;
+        }
     }
 }
