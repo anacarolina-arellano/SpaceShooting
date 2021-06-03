@@ -12,7 +12,6 @@ public class GameManager : Singleton<GameManager>
     
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject pointsText;
-    [SerializeField] Slider HealthBar;
 
     private TextMeshProUGUI myText;
     public bool gameOver = false;
@@ -21,9 +20,11 @@ public class GameManager : Singleton<GameManager>
     public float curSpawnDelay;
     public int points;
     public float health;
+    [SerializeField] private Image barfill;
 
     private void Start()
     {
+        Time.timeScale = 1;
         points = 0;
         health = 1.0f;
         gameOverText.SetActive(false);
@@ -33,7 +34,6 @@ public class GameManager : Singleton<GameManager>
     {
         
         myText = pointsText.GetComponent<TextMeshProUGUI>();
-        //Debug.Log(points);
         myText.SetText("Score: " + points.ToString());
         curSpawnDelay += Time.deltaTime;
 
@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager>
             gameOverText.SetActive(true);
             Time.timeScale = 0;
         }
-        
+        barfill.fillAmount = health == 0 ? 0f : health;
     }
 
     void SpawnEnemy()
@@ -59,7 +59,6 @@ public class GameManager : Singleton<GameManager>
 
     public void Restart()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
         SceneManager.LoadScene(0);
     }
 

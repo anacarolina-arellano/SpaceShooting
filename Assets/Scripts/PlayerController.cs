@@ -15,18 +15,15 @@ public class PlayerController : MonoBehaviour
     {
         shootTime += Time.deltaTime;
         Move();
-        if (Input.GetKey(KeyCode.Space) && shootTime >= cooldown) { 
+        if (Input.GetKey(KeyCode.Space) ) { 
             Fire();
-            shootTime = 0;
         }
     }
     void Move()
     {
         float fHorizontal = Input.GetAxis("Horizontal");
-        float fVertical = Input.GetAxis("Vertical");
 
         transform.Translate(Vector3.right * Time.deltaTime * m_fSpeed * fHorizontal, Space.World);
-        transform.Translate(Vector3.up * Time.deltaTime * m_fSpeed * fVertical, Space.World);
     }
 
  
@@ -34,7 +31,8 @@ public class PlayerController : MonoBehaviour
     { 
         GameObject bullet = Instantiate(bullets, transform.position, transform.rotation);
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-        rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);        
+        rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+        Destroy(bullet, 2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,7 +47,6 @@ public class PlayerController : MonoBehaviour
                 gameManager.gameOver = true;
             }
             Destroy(collision.gameObject);
-            Debug.Log(GameManager.instance.health);
         }
     }
 }
