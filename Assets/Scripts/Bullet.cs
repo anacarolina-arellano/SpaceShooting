@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int damage = 10;[SerializeField] GameManager gameManager;
+    public GameManager gameManager;
+    public int damage = 10;
     private int totalDamage = 0;
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -17,7 +18,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.tag == "Asteroid")
         {
-            gameManager.points += damage;
+            GameManager.instance.points += damage;
             Destroy(collision.gameObject);
             
         }

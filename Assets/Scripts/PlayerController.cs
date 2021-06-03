@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float cooldown = 0.1f;
     public GameObject bullets;
     float m_fSpeed = 5.0f;
-    [SerializeField] GameManager gameManager;
+    public GameManager gameManager;
 
     private float shootTime = 0.0f;
 
@@ -42,7 +42,14 @@ public class PlayerController : MonoBehaviour
         
         if (collision.gameObject.tag == "Asteroid")
         {
-            gameManager.gameOver = true;
+            GameManager.instance.health -= 0.34f;
+
+            if (GameManager.instance.health <= 0.0f)
+            {
+                gameManager.gameOver = true;
+            }
+            Destroy(collision.gameObject);
+            Debug.Log(GameManager.instance.health);
         }
     }
 }
