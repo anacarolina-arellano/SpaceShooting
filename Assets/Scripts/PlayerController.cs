@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bullets;
     float m_fSpeed = 5.0f;
     public GameManager gameManager;
+    public bool isRight;
+    public bool isLeft;
 
     private float shootTime = 0.0f;
 
@@ -15,15 +17,20 @@ public class PlayerController : MonoBehaviour
     {
         shootTime += Time.deltaTime;
         Move();
-        if (Input.GetKey(KeyCode.Space) ) { 
+        if (Input.GetKey(KeyCode.Space)) {
             Fire();
         }
     }
     void Move()
     {
         float fHorizontal = Input.GetAxis("Horizontal");
+        if ((fHorizontal == 1 && isRight) || (fHorizontal == -1 && isLeft))
+            fHorizontal = 0;
+        //Debug.Log(fHorizontal);
+        if (fHorizontal != 0)
+            transform.Translate(Vector3.right * Time.deltaTime * m_fSpeed * fHorizontal, Space.World);
 
-        transform.Translate(Vector3.right * Time.deltaTime * m_fSpeed * fHorizontal, Space.World);
+
     }
 
  
@@ -37,7 +44,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        //Debug.Log(collision.gameObject.name);
+
         if (collision.gameObject.tag == "Asteroid")
         {
             GameManager.instance.health -= 0.34f;
@@ -47,6 +55,25 @@ public class PlayerController : MonoBehaviour
                 gameManager.gameOver = true;
             }
             Destroy(collision.gameObject);
+        } else if(collision.gameObject.name == "RightWall")
+        {
+            isRight = true;
+        }
+        else if (collision.gameObject.name == "LeftWall")
+        {
+            isLeft = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "RightWall")
+        {
+            isRight = false;
+        }
+        else if (collision.gameObject.name == "LeftWall")
+        {
+            isLeft = false;
         }
     }
 }

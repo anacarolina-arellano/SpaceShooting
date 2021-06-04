@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 270651877}
   m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,8 +210,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270651873}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.17, y: -0.16, z: 0}
-  m_LocalScale: {x: 1, y: 68.203125, z: 1}
+  m_LocalPosition: {x: -2.53, y: -0.16, z: 0}
+  m_LocalScale: {x: 5, y: 68.203125, z: 1}
   m_Children: []
   m_Father: {fileID: 753959000}
   m_RootOrder: 0
@@ -277,7 +277,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -301,14 +301,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270651873}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 610598958}
   m_Layer: 0
   m_Name: RightWall
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -691,8 +691,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610598954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.64, y: -0.16000009, z: 0}
-  m_LocalScale: {x: 1, y: 68.203125, z: 1}
+  m_LocalPosition: {x: 3.97, y: -0.16000009, z: 0}
+  m_LocalScale: {x: 5, y: 68.203125, z: 1}
   m_Children: []
   m_Father: {fileID: 753959000}
   m_RootOrder: 1
@@ -758,7 +758,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -782,14 +782,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610598954}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1711,7 +1711,7 @@ GameObject:
   - component: {fileID: 1446311622}
   m_Layer: 0
   m_Name: TopWall
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2032,6 +2032,8 @@ MonoBehaviour:
   cooldown: 0.7
   bullets: {fileID: 4429764220306477655, guid: 4d1631c9c5a8c4a0bbd0f8209d4509ef, type: 3}
   gameManager: {fileID: 1265001750}
+  isRight: 0
+  isLeft: 0
 --- !u!212 &1775677035
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2131,7 +2133,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775677033}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -2188,7 +2190,7 @@ GameObject:
   - component: {fileID: 1779265852}
   m_Layer: 0
   m_Name: BottomWall
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2202,7 +2204,7 @@ Transform:
   m_GameObject: {fileID: 1779265848}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.73, y: -6.51, z: 0}
-  m_LocalScale: {x: 1.02, y: 36.522774, z: 1.02}
+  m_LocalScale: {x: 1.02, y: 75.78476, z: 1.02}
   m_Children: []
   m_Father: {fileID: 753959000}
   m_RootOrder: 3
