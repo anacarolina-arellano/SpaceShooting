@@ -8,11 +8,17 @@ public class PlayerController : MonoBehaviour
     public GameObject bullets;
     float m_fSpeed = 5.0f;
     public GameManager gameManager;
+    //can go to that direction
     public bool isRight;
     public bool isLeft;
 
     private float shootTime = 0.0f;
 
+    private void Start()
+    {
+        isRight = true;
+        isLeft = true;
+    }
     void FixedUpdate()
     {
         shootTime += Time.deltaTime;
@@ -23,17 +29,14 @@ public class PlayerController : MonoBehaviour
     }
     void Move()
     {
-        float fHorizontal = Input.GetAxis("Horizontal");
-        if ((fHorizontal == 1 && isRight) || (fHorizontal == -1 && isLeft))
-            fHorizontal = 0;
-        //Debug.Log(fHorizontal);
-        if (fHorizontal != 0)
+         float fHorizontal = Input.GetAxis("Horizontal");
+         if ((fHorizontal > 0 && isRight) || (fHorizontal < 0 && isLeft))
+         {
             transform.Translate(Vector3.right * Time.deltaTime * m_fSpeed * fHorizontal, Space.World);
-
-
+         }
     }
 
- 
+
     void Fire()
     { 
         GameObject bullet = Instantiate(bullets, transform.position, transform.rotation);
@@ -44,7 +47,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log(collision.gameObject.name);
 
         if (collision.gameObject.tag == "Asteroid")
         {
@@ -55,13 +57,20 @@ public class PlayerController : MonoBehaviour
                 gameManager.gameOver = true;
             }
             Destroy(collision.gameObject);
-        } else if(collision.gameObject.name == "RightWall")
+        }
+        else if(collision.gameObject.name == "RightWall")
         {
-            isRight = true;
+            isRight = false;
         }
         else if (collision.gameObject.name == "LeftWall")
         {
-            isLeft = true;
+            isLeft = false;
+        }
+
+        if (collision.gameObject.tag == "PowerUp")
+        {
+            GameManager.instance.health += 0.34f;
+            Destroy(collision.gameObject);
         }
     }
 
@@ -69,11 +78,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name == "RightWall")
         {
-            isRight = false;
+            isRight = true;
         }
         else if (collision.gameObject.name == "LeftWall")
         {
-            isLeft = false;
+            isLeft = true;
         }
     }
 }

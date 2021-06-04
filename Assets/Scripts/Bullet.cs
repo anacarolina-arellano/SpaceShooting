@@ -11,11 +11,6 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Walls")
-        {
-            Destroy(collision.gameObject);
-        }
-
         if (collision.gameObject.tag == "Asteroid")
         {
             GameManager.instance.points += damage;

@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     {
         if(collision.gameObject.tag == "Walls")
         {
+            Debug.Log("Aqui");
             Destroy(gameObject);
         } 
         else if(collision.gameObject.tag == "Bullet")
