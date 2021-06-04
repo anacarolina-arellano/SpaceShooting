@@ -7,22 +7,25 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
-    public GameObject enemyObject;
-    public Transform[] spawnPoints;
-    public PowerUp powerupPrefab;
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject pointsText;
+    [SerializeField] private Image barfill;
+
+    public GameObject enemyObject;
+    public Transform[] spawnPoints;
+    public PowerUp powerupPrefab;    
     private TextMeshProUGUI myText;
+
     public bool gameOver = false;
 
     public float maxDelayPowerUp;
     public float maxSpawnDelay;
     public float curSpawnDelay;
     public float curPowerDelay;
+    
     public int points;
     public float health;
-    [SerializeField] private Image barfill;
-
+    
     private void Start()
     {
         Time.timeScale = 1;

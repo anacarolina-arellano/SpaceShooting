@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
-    [SerializeField] private float cooldown = 0.1f;
-    public GameObject bullets;
-    float m_fSpeed = 5.0f;
+{    
+    public GameObject bullets;    
     public GameManager gameManager;
+    
     //can go to that direction
     public bool isRight;
     public bool isLeft;
 
+    private float m_fSpeed = 5.0f;
     private float shootTime = 0.0f;
 
     private void Start()
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "PowerUp")
         {
             GameManager.instance.health += 0.34f;
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
     }
 

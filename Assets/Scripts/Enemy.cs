@@ -27,8 +27,7 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Walls")
-        {
-            Debug.Log("Aqui");
+        {            
             Destroy(gameObject);
         } 
         else if(collision.gameObject.tag == "Bullet")
